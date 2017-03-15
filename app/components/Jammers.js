@@ -26,7 +26,10 @@ class Board extends React.Component {
           {7}
           {8}
         </div>
-      </div>
+        <div>
+        <img src="https://i1.sndcdn.com/avatars-000294022506-21vz5w-t500x500.jpg"></img>
+        </div>
+       </div>
     );
   }
 }

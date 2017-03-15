@@ -9827,7 +9827,8 @@ class Board extends React.Component {
         this.renderSquare(6),
         this.renderSquare(7),
         this.renderSquare(8)
-      )
+      ),
+      React.createElement("img", { src: "https://i1.sndcdn.com/avatars-000294022506-21vz5w-t500x500.jpg" })
     );
   }
 }
@@ -9946,15 +9947,50 @@ module.exports = Game;
 
 var React = __webpack_require__(33);
 
-function manageJammers() {
-  return React.createElement(
-    'h1',
-    null,
-    'Homepage'
-  );
+// ===========================================================
+class Board extends React.Component {
+
+  render() {
+
+    return React.createElement(
+      "div",
+      null,
+      React.createElement(
+        "h1",
+        null,
+        "Jammers"
+      ),
+      React.createElement(
+        "div",
+        { className: "board-row" },
+        0,
+        1,
+        2
+      ),
+      React.createElement(
+        "div",
+        { className: "board-row" },
+        3,
+        4,
+        5
+      ),
+      React.createElement(
+        "div",
+        { className: "board-row" },
+        6,
+        7,
+        8
+      ),
+      React.createElement(
+        "div",
+        { style: "width: 100%; height: 100%;" },
+        React.createElement("img", { src: "https://i1.sndcdn.com/avatars-000294022506-21vz5w-t500x500.jpg" })
+      )
+    );
+  }
 }
 
-module.exports = manageJammers;
+module.exports = Board;
 
 /***/ }),
 /* 87 */
@@ -22205,7 +22241,7 @@ var ReactDOM = __webpack_require__(87);
 var Jammers = __webpack_require__(86);
 var App = __webpack_require__(85);
 
-ReactDOM.render(React.createElement(App, null), document.getElementById('app'));
+ReactDOM.render(React.createElement(Jammers, null), document.getElementById('app'));
 
 /***/ })
 /******/ ]);
