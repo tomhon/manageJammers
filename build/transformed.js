@@ -9946,34 +9946,53 @@ module.exports = Game;
 
 var React = __webpack_require__(33);
 
+function tracklist(title, artist) {
+  this.title = title;
+  this.artist = artist;
+}
+
 var jammer = new Array();
 
 jammer[0] = {
-  "image": null,
+  "image": "Image of Tom",
   "name": "Tom",
-  "badge": ":-)"
+  "badge": ":-)",
+  "tracklist": array()
 };
 
+var otracklist = new tracklist('Tubthumping', 'Chumbawamba');
+jammer[0].tracklist.push(otracklist);
+var otracklist = new tracklist('Bitter Sweet Symphony', 'The Verve');
+jammer[0].tracklist.push(otracklist);
+
 jammer[1] = {
-  "image": null,
+  "image": "Image of Luis",
   "name": "Luis",
   "badge": ":-)"
 };
 
 jammer[2] = {
-  "image": null,
+  "image": "Image of Simon",
   "name": "Simon",
   "badge": ":-)"
 };
 
 jammer[3] = {
-  "image": null,
+  "image": "Image of Natalia",
   "name": "Natalia",
   "badge": ":-)"
 };
 
 // ===========================================================
-class Board extends React.Component {
+class JammerNavigation extends React.Component {
+
+  renderTrackList(i) {
+    return React.createElement(
+      "div",
+      null,
+      jammer[0].track - List[0]
+    );
+  }
 
   render() {
 
@@ -9990,7 +10009,12 @@ class Board extends React.Component {
         { className: "jammer-row" },
         jammer[0].image,
         jammer[0].name,
-        jammer[0].badge
+        jammer[0].badge,
+        React.createElement(
+          "div",
+          { className: "track-list" },
+          this.renderTrackList(jammer[0])
+        )
       ),
       React.createElement(
         "div",
@@ -10005,17 +10029,12 @@ class Board extends React.Component {
         jammer[2].image,
         jammer[2].name,
         jammer[2].badge
-      ),
-      React.createElement(
-        "div",
-        null,
-        React.createElement("img", { src: "https://i1.sndcdn.com/avatars-000294022506-21vz5w-t500x500.jpg" })
       )
     );
   }
 }
 
-module.exports = Board;
+module.exports = JammerNavigation;
 
 /***/ }),
 /* 87 */

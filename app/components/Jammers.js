@@ -1,36 +1,68 @@
 var React = require('react');
 
+//Tracklist Object Prototype
+function tracklist(title, artist) {
+  this.title = title;
+  this.artist = artist;
+} 
+
+
+
+
+
 var jammer = new Array();
 
 jammer[0] = {
-  "image": null,
+  "image": "Image of Tom",
   "name": "Tom",
-  "badge": ":-)"
-}
+  "badge": ":-)",
+  "tracklist": Array ()
+};
+
+var otracklist = new tracklist('Tubthumping', 'Chumbawamba');
+jammer[0].tracklist.push(otracklist);
+var otracklist = new tracklist('Bitter Sweet Symphony', 'The Verve');
+jammer[0].tracklist.push(otracklist);
+
+console.log(jammer[0].tracklist[0]);
 
 jammer[1] = {
-  "image": null,
+  "image": "Image of Luis",
   "name": "Luis",
   "badge": ":-)"
 }
 
 jammer[2] = {
-  "image": null,
+  "image": "Image of Simon",
   "name": "Simon",
   "badge": ":-)"
 }
 
 jammer[3] = {
-  "image": null,
+  "image": "Image of Natalia",
   "name": "Natalia",
   "badge": ":-)"
 }
 
 
 
-// ===========================================================
-class Board extends React.Component {
 
+
+// ===========================================================
+class JammerNavigation extends React.Component {
+
+  renderTrackList(i) {
+    return <div>
+        {jammer[i].tracklist.forEach(function(item){
+          item.track,
+          item.artist
+        })}
+        {jammer[i].tracklist[0].artist},
+        {jammer[i].tracklist[0].title},
+    </div>
+  }
+  
+  
   render() {
     
     return (
@@ -40,6 +72,9 @@ class Board extends React.Component {
           {jammer[0].image}
           {jammer[0].name}
           {jammer[0].badge}
+          <div className="track-list">
+              {this.renderTrackList(0)}
+            </div>
         </div>
         <div className="jammer-row">
           {jammer[1].image}
@@ -51,13 +86,11 @@ class Board extends React.Component {
           {jammer[2].name}
           {jammer[2].badge}
         </div>
-        <div>
-        <img src="https://i1.sndcdn.com/avatars-000294022506-21vz5w-t500x500.jpg"></img>
-        </div>
        </div>
     );
   }
 }
 
 
-module.exports= (Board);
+
+module.exports= (JammerNavigation);
