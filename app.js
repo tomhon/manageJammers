@@ -14,3 +14,9 @@ server.get('/', function (req, res) {
     res.send('SoundCloud Jammers Running' )
 
 }); 
+
+server.get('/build', function (req, res) { 
+
+    res.send('Hello from build' )
+
+}); 
