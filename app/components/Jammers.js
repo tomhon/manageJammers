@@ -52,14 +52,13 @@ jammer[3] = {
 class JammerNavigation extends React.Component {
 
   renderTrackList(i) {
-    return <div>
-        {jammer[i].tracklist.forEach(function(item){
-          item.track,
-          item.artist
-        })}
-        {jammer[i].tracklist[0].artist},
-        {jammer[i].tracklist[0].title},
-    </div>
+    return 
+        jammer[i].tracklist.forEach(function(item){
+          <div>item.track,
+          item.artist </div>
+        })
+        // {jammer[i].tracklist[0].artist},
+        // {jammer[i].tracklist[0].title},
   }
   
   
