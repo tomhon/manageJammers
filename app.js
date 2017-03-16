@@ -1,6 +1,4 @@
 var express = require('express');
-
-
 var server = express();
 
 console.log('SoundCloud Jammers Running')
@@ -11,4 +9,6 @@ server.get('/', function (req, res) {
 
 }); 
 
-server.listen(80);
+server.listen(80, function () {
+    console.log('Server Listening on Port 80')
+});
