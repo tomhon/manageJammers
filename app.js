@@ -1,5 +1,6 @@
 var restify = require('restify');
 
+
 var server = restify.createServer(); 
 
 server.listen(process.env.port || 3978, function () {
@@ -17,6 +18,7 @@ server.get('/', function (req, res) {
 
 server.get('/build', function (req, res) { 
 
-    res.send('Hello from build' )
+    res.json({connected: 'to build'} )
+
 
 }); 
