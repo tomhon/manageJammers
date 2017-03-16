@@ -86,6 +86,8 @@ class ListJammer extends React.Component {
         <div className="ListJammer">
           <ul>
             {this.props.JammerToList.name}
+            {this.props.JammerToList.image}
+            {this.props.JammerToList.badge}
             {this.props.JammerToList.tracklist.map(item => (
               <ListTracks TrackToList={item}/>
             ))}
