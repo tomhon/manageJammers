@@ -11,3 +11,4 @@ server.get('/', function (req, res) {
 
 }); 
 
+server.listen(80);
