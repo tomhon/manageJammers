@@ -44,47 +44,102 @@ jammer[3] = {
   "badge": ":-)"
 }
 
+  function Artist(props) {
+    console.log(props.artist);
+    return 
+      <div>Tubthumping </div>
+    }
 
+  function Title(props) {
+    console.log(props.title);
+    return 
+      <div>Chumbawumba </div>
+    }
+
+// ===========================================================
+class TrackListItem extends React.Component {
+
+  
+  render() {
+
+    return (
+        <div>
+        <h1>TrackListItem</h1>
+
+        </div>
+    );
+  }
+}
+
+
+// ===========================================================
+class TrackList extends React.Component {
+
+  
+  render() {
+    const CurrentTrackList = jammer[this.props.CurrentJammer].tracklist;
+    return (
+      <div>
+        <h1>TrackList for {CurrentTrackList.name}</h1>
+          <TrackListItem 
+
+
+          />
+          <TrackListItem 
+
+
+          />
+        </div>
+    );
+  }
+}
+
+
+// ===========================================================
+class JammerListItem extends React.Component {
+  render() {   
+    return (
+      <div>
+        <h1>JammerListItem {this.props.ListItem}</h1>
+          {jammer[this.props.ListItem].image};
+          {jammer[this.props.ListItem].name};
+          {jammer[this.props.ListItem].badge};
+          <TrackList 
+            CurrentJammer={this.props.ListItem}
+            />
+        </div>
+    );
+  }
+}
+
+
+
+// ===========================================================
+class JammerList extends React.Component {
+  render() {
+    return (
+      <div>
+        <h1>JammerList {this.props.jammer}</h1>
+          <JammerListItem 
+            ListItem={this.props.jammer}
+          />
+        </div>
+    );
+  }
+}
 
 
 
 // ===========================================================
 class JammerNavigation extends React.Component {
-
-  renderTrackList(i) {
-    return 
-        jammer[i].tracklist.forEach(function(item){
-          <div>item.track,
-          item.artist </div>
-        })
-        // {jammer[i].tracklist[0].artist},
-        // {jammer[i].tracklist[0].title},
-  }
-  
-  
-  render() {
-    
+  render() { 
     return (
-      <div>
+      <div className='jammers'>
         <h1>Jammers</h1>
-        <div className="jammer-row">
-          {jammer[0].image}
-          {jammer[0].name}
-          {jammer[0].badge}
-          <div className="track-list">
-              {this.renderTrackList(0)}
-            </div>
-        </div>
-        <div className="jammer-row">
-          {jammer[1].image}
-          {jammer[1].name}
-          {jammer[1].badge}
-        </div>
-        <div className="jammer-row">
-          {jammer[2].image}
-          {jammer[2].name}
-          {jammer[2].badge}
-        </div>
+        <div className="jammer-list">
+            <JammerList jammer={0} /> 
+            <JammerList jammer={1} />         
+          </div>
        </div>
     );
   }

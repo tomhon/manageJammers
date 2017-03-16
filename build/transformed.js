@@ -9961,6 +9961,27 @@ jammer[0] = {
   "tracklist": Array()
 };
 
+jammer[1] = {
+  "image": "Image of Luis",
+  "name": "Luis",
+  "badge": ":-)",
+  "tracklist": Array()
+};
+
+jammer[2] = {
+  "image": "Image of Simon",
+  "name": "Simon",
+  "badge": ":-)",
+  "tracklist": Array()
+};
+
+jammer[3] = {
+  "image": "Image of Natalia",
+  "name": "Natalia",
+  "badge": ":-)",
+  "tracklist": Array()
+};
+
 var otracklist = new tracklist('Tubthumping', 'Chumbawamba');
 jammer[0].tracklist.push(otracklist);
 jammer[1].tracklist.push(otracklist);
@@ -9970,24 +9991,6 @@ var otracklist = new tracklist('Bitter Sweet Symphony', 'The Verve');
 jammer[0].tracklist.push(otracklist);
 
 console.log(jammer[0].tracklist[0]);
-
-jammer[1] = {
-  "image": "Image of Luis",
-  "name": "Luis",
-  "badge": ":-)"
-};
-
-jammer[2] = {
-  "image": "Image of Simon",
-  "name": "Simon",
-  "badge": ":-)"
-};
-
-jammer[3] = {
-  "image": "Image of Natalia",
-  "name": "Natalia",
-  "badge": ":-)"
-};
 
 function listTracks() {
   var trackInfo = "";
@@ -10001,18 +10004,44 @@ function listTracks() {
 };
 
 // ===========================================================
-class ListOfTracks extends React.Component {
+class ListTracks extends React.Component {
   render() {
-    const listOfTracks = this.props.Tracks;
+
     return React.createElement(
       "div",
       null,
       React.createElement(
-        "h1",
-        null,
-        "ListOfTracks"
-      ),
-      React.createElement("div", { className: "ListOfTracks" })
+        "div",
+        { className: "ListOfTracks" },
+        React.createElement(
+          "ul",
+          null,
+          this.props.TrackToList.artist,
+          this.props.TrackToList.title
+        )
+      )
+    );
+  }
+}
+
+// ===========================================================
+class ListJammer extends React.Component {
+  render() {
+    return React.createElement(
+      "div",
+      null,
+      React.createElement(
+        "div",
+        { className: "ListJammer" },
+        React.createElement(
+          "ul",
+          null,
+          this.props.JammerToList.name,
+          this.props.JammerToList.image,
+          this.props.JammerToList.badge,
+          this.props.JammerToList.tracklist.map(item => React.createElement(ListTracks, { TrackToList: item }))
+        )
+      )
     );
   }
 }
@@ -10032,11 +10061,7 @@ class JammerNavigation extends React.Component {
       React.createElement(
         "ul",
         null,
-        jammer.map(item => React.createElement(
-          "li",
-          { key: item.id },
-          item.name
-        ))
+        jammer.map(item => React.createElement(ListJammer, { JammerToList: item }))
       )
     );
   }
