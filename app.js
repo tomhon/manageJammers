@@ -10,15 +10,19 @@ server.listen(process.env.port || 3978, function () {
 });
 
 
-server.get('/', function (req, res) { 
+server.get('/', restify.serveStatic({
+ directory: './build',
+ default: 'index.html'
+}));
 
-    res.send('SoundCloud Jammers Running' )
+// server.get('/build', function (req, res) { 
 
-}); 
-
-server.get('/build', function (req, res) { 
-
-    res.json({connected: 'to build'} )
+//     res.json({connected: 'to build'} )
 
 
-}); 
+// }); 
+
+server.get('/build', restify.serveStatic({
+ directory: __dirname,
+ default: 'index.html'
+}));
