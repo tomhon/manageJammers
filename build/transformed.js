@@ -9961,93 +9961,54 @@ jammer[0] = {
   "tracklist": Array()
 };
 
-jammer[1] = {
-  "image": "Image of Luis",
-  "name": "Luis",
-  "badge": ":-)",
-  "tracklist": Array()
-};
-
-jammer[2] = {
-  "image": "Image of Simon",
-  "name": "Simon",
-  "badge": ":-)",
-  "tracklist": Array()
-};
-
-jammer[3] = {
-  "image": "Image of Natalia",
-  "name": "Natalia",
-  "badge": ":-)",
-  "tracklist": Array()
-};
-
 var otracklist = new tracklist('Tubthumping', 'Chumbawamba');
 jammer[0].tracklist.push(otracklist);
-jammer[1].tracklist.push(otracklist);
-jammer[2].tracklist.push(otracklist);
-jammer[3].tracklist.push(otracklist);
 var otracklist = new tracklist('Bitter Sweet Symphony', 'The Verve');
 jammer[0].tracklist.push(otracklist);
 
 console.log(jammer[0].tracklist[0]);
 
-function listTracks() {
-  var trackInfo = "";
-  jammer[0].tracklist.forEach(function (item) {
-    trackInfo += item.artist;
-    trackInfo += item.title;
-    trackInfo += '<br>';
-  });
-  console.log('this is trackInfo' + trackInfo);
-  return trackInfo;
+jammer[1] = {
+  "image": "Image of Luis",
+  "name": "Luis",
+  "badge": ":-)"
 };
 
-// ===========================================================
-class ListTracks extends React.Component {
-  render() {
+jammer[2] = {
+  "image": "Image of Simon",
+  "name": "Simon",
+  "badge": ":-)"
+};
 
-    return React.createElement(
-      "div",
-      null,
-      React.createElement(
-        "div",
-        { className: "ListOfTracks" },
-        React.createElement(
-          "ul",
-          null,
-          this.props.TrackToList.artist,
-          this.props.TrackToList.title
-        )
-      )
-    );
-  }
+jammer[3] = {
+  "image": "Image of Natalia",
+  "name": "Natalia",
+  "badge": ":-)"
+};
+
+function Artist(props) {
+  console.log(props.artist);
+  return;
+  React.createElement(
+    "div",
+    null,
+    "Tubthumping "
+  );
+}
+
+function Title(props) {
+  console.log(props.title);
+  return;
+  React.createElement(
+    "div",
+    null,
+    "Chumbawumba "
+  );
 }
 
 // ===========================================================
-class ListJammer extends React.Component {
-  render() {
-    return React.createElement(
-      "div",
-      null,
-      React.createElement(
-        "div",
-        { className: "ListJammer" },
-        React.createElement(
-          "ul",
-          null,
-          this.props.JammerToList.name,
-          this.props.JammerToList.image,
-          this.props.JammerToList.badge,
-          this.props.JammerToList.tracklist.map(item => React.createElement(ListTracks, { TrackToList: item }))
-        )
-      )
-    );
-  }
-}
+class TrackListItem extends React.Component {
 
-// ===========================================================
-class JammerNavigation extends React.Component {
   render() {
 
     return React.createElement(
@@ -10056,12 +10017,92 @@ class JammerNavigation extends React.Component {
       React.createElement(
         "h1",
         null,
+        "TrackListItem"
+      )
+    );
+  }
+}
+
+// ===========================================================
+class TrackList extends React.Component {
+
+  render() {
+    const CurrentTrackList = jammer[this.props.CurrentJammer].tracklist;
+    return React.createElement(
+      "div",
+      null,
+      React.createElement(
+        "h1",
+        null,
+        "TrackList for ",
+        CurrentTrackList.name
+      ),
+      React.createElement(TrackListItem, null),
+      React.createElement(TrackListItem, null)
+    );
+  }
+}
+
+// ===========================================================
+class JammerListItem extends React.Component {
+  render() {
+    return React.createElement(
+      "div",
+      null,
+      React.createElement(
+        "h1",
+        null,
+        "JammerListItem ",
+        this.props.ListItem
+      ),
+      jammer[this.props.ListItem].image,
+      ";",
+      jammer[this.props.ListItem].name,
+      ";",
+      jammer[this.props.ListItem].badge,
+      ";",
+      React.createElement(TrackList, {
+        CurrentJammer: this.props.ListItem
+      })
+    );
+  }
+}
+
+// ===========================================================
+class JammerList extends React.Component {
+  render() {
+    return React.createElement(
+      "div",
+      null,
+      React.createElement(
+        "h1",
+        null,
+        "JammerList ",
+        this.props.jammer
+      ),
+      React.createElement(JammerListItem, {
+        ListItem: this.props.jammer
+      })
+    );
+  }
+}
+
+// ===========================================================
+class JammerNavigation extends React.Component {
+  render() {
+    return React.createElement(
+      "div",
+      { className: "jammers" },
+      React.createElement(
+        "h1",
+        null,
         "Jammers"
       ),
       React.createElement(
-        "ul",
-        null,
-        jammer.map(item => React.createElement(ListJammer, { JammerToList: item }))
+        "div",
+        { className: "jammer-list" },
+        React.createElement(JammerList, { jammer: 0 }),
+        React.createElement(JammerList, { jammer: 1 })
       )
     );
   }
@@ -22315,8 +22356,8 @@ module.exports = traverseAllChildren;
 
 var React = __webpack_require__(33);
 var ReactDOM = __webpack_require__(87);
-// var Jammers = require('./components/Jammers');
 var Jammers = __webpack_require__(86);
+// var Jammers = require('./components/Jammers.new');
 var App = __webpack_require__(85);
 
 ReactDOM.render(React.createElement(Jammers, null), document.getElementById('app'));

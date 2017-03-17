@@ -6,10 +6,6 @@ function tracklist(title, artist) {
   this.artist = artist;
 } 
 
-
-
-
-
 var jammer = new Array();
 
 jammer[0] = {
@@ -19,127 +15,128 @@ jammer[0] = {
   "tracklist": Array ()
 };
 
-var otracklist = new tracklist('Tubthumping', 'Chumbawamba');
-jammer[0].tracklist.push(otracklist);
-var otracklist = new tracklist('Bitter Sweet Symphony', 'The Verve');
-jammer[0].tracklist.push(otracklist);
-
-console.log(jammer[0].tracklist[0]);
-
 jammer[1] = {
   "image": "Image of Luis",
   "name": "Luis",
-  "badge": ":-)"
+  "badge": ":-)",
+  "tracklist": Array ()
 }
 
 jammer[2] = {
   "image": "Image of Simon",
   "name": "Simon",
-  "badge": ":-)"
+  "badge": ":-)",
+  "tracklist": Array ()
 }
 
 jammer[3] = {
   "image": "Image of Natalia",
   "name": "Natalia",
-  "badge": ":-)"
+  "badge": ":-)",
+  "tracklist": Array ()
 }
 
-  function Artist(props) {
-    console.log(props.artist);
-    return 
-      <div>Tubthumping </div>
-    }
+var otracklist = new tracklist('Tubthumping', 'Chumbawamba');
+jammer[0].tracklist.push(otracklist);
+jammer[1].tracklist.push(otracklist);
+jammer[2].tracklist.push(otracklist);
+jammer[3].tracklist.push(otracklist);
+var otracklist = new tracklist('Bitter Sweet Symphony', 'The Verve');
+jammer[0].tracklist.push(otracklist);
 
-  function Title(props) {
-    console.log(props.title);
-    return 
-      <div>Chumbawumba </div>
-    }
+console.log(jammer[0].tracklist[0]);
+
+
+
+// function listTracks () {
+//   var trackInfo = "";
+//   jammer[0].tracklist.forEach(function(item) {
+//       trackInfo += item.artist;
+//       trackInfo += item.title;
+//       trackInfo += '<br>'
+//   });
+//   console.log('this is trackInfo' + trackInfo)
+//   return trackInfo;
+  
+// };
+
+
 
 // ===========================================================
-class TrackListItem extends React.Component {
+class ListTracks extends React.Component {
+  render() { 
+    if (! this.props.DisplayTracks) {return (<div></div>)};
+
+    return (
+      <div>
+        <div className="ListOfTracks">
+          <ul>
+            {this.props.TrackToList.artist}{this.props.TrackToList.title}
+          </ul>
+        </div>
+       </div>
+    );
+  }
+}
+
+// ===========================================================
+class ListJammer extends React.Component {
+
+  constructor() {
+    super();
+    this.state = {
+      tracksVisible: false
+    };
+  }
+
+   handleClick() {
+      console.log('handling click in JammerNavigation on ' + this.props.JammerToList.name)
+      this.setState({
+          tracksVisible: !this.state.tracksVisible
+      })
+      
+      } 
 
   
-  render() {
-
-    return (
-        <div>
-        <h1>TrackListItem</h1>
-
-        </div>
-    );
-  }
-}
-
-
-// ===========================================================
-class TrackList extends React.Component {
-
-  
-  render() {
-    const CurrentTrackList = jammer[this.props.CurrentJammer].tracklist;
+  render() { 
     return (
       <div>
-        <h1>TrackList for {CurrentTrackList.name}</h1>
-          <TrackListItem 
-
-
-          />
-          <TrackListItem 
-
-
-          />
+        <div className="ListJammer" onClick={() => this.handleClick()}>
+          <ul>
+            {this.props.JammerToList.name}
+            {this.props.JammerToList.image}
+            {this.props.JammerToList.badge}
+            {this.props.JammerToList.tracklist.map(item => (
+              <ListTracks 
+                  TrackToList={item}
+                  DisplayTracks={this.state.tracksVisible}
+                  />
+            ))}
+          </ul>
         </div>
+       </div>
     );
   }
 }
-
-
-// ===========================================================
-class JammerListItem extends React.Component {
-  render() {   
-    return (
-      <div>
-        <h1>JammerListItem {this.props.ListItem}</h1>
-          {jammer[this.props.ListItem].image};
-          {jammer[this.props.ListItem].name};
-          {jammer[this.props.ListItem].badge};
-          <TrackList 
-            CurrentJammer={this.props.ListItem}
-            />
-        </div>
-    );
-  }
-}
-
-
-
-// ===========================================================
-class JammerList extends React.Component {
-  render() {
-    return (
-      <div>
-        <h1>JammerList {this.props.jammer}</h1>
-          <JammerListItem 
-            ListItem={this.props.jammer}
-          />
-        </div>
-    );
-  }
-}
-
 
 
 // ===========================================================
 class JammerNavigation extends React.Component {
-  render() { 
+  
+
+  
+  render() {
+   
     return (
-      <div className='jammers'>
+      <div>
         <h1>Jammers</h1>
-        <div className="jammer-list">
-            <JammerList jammer={0} /> 
-            <JammerList jammer={1} />         
-          </div>
+          <ul>
+            {jammer.map(item => (
+              <ListJammer 
+                JammerToList={item}
+                />
+            ))}
+          </ul>
        </div>
     );
   }
