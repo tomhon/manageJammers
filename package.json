@@ -30,6 +30,7 @@
     "express": "^4.15.2",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
-    "restify": "^4.3.0"
+    "restify": "^4.3.0",
+    "tedious": "^1.15.0"
   }
 }

@@ -1,5 +1,114 @@
 var React = require('react');
 
+//Connect to SQL Server
+var Request = require('tedious').Request;
+var TYPES = require('tedious').TYPES; 
+var Connection = require('tedious').Connection;
+
+console.log('requires completed');
+
+//initialize mapping data array
+
+//arrayIsvTE is sourced from SQL Server
+var arrayIsvTE = new Array();
+
+function isv() {
+    this.id = 0;
+    this.title = "";
+    this.TE = "";
+    this.BE = "";
+}
+
+
+//error logging array
+var arrayErr = new Array();
+
+// set up SQL server connection using Application Environment Variables
+
+    var config = {
+            userName: process.env.SQLuserName || 'Teslovetohack@k9',
+            password: process.env.SQLpassword || 'Building9',
+            server: process.env.SQLserver || 'k9.database.windows.net',
+            // If you are on Microsoft Azure, you need this:
+            options: {encrypt: true, database: process.env.SQLdatabase || 'TEDGISV'}
+        };
+
+// var config = {
+//     userName: process.env.SQLuserName,
+//     password: process.env.SQLpassword,
+//     server: process.env.SQLserver,
+//     // If you are on Microsoft Azure, you need this:
+//     options: {encrypt: true, database: process.env.SQLdatabase}
+// };
+
+//initiate connection to SQL Server
+var connection = new Connection(config);
+connection.on('connect', function(err) {
+    // If no error, then good to proceed.
+    
+        if (err) {
+        //    console.log(err);
+            arrayErr.push(err);
+        } else {
+          console.log("Connected to " + this.config.server + " " + this.config.options.database);
+          arrayErr.push("Connected to " + this.config.server);
+          loadMappingArray();  
+
+        };
+        
+        
+    });
+ 
+ //function to execute SQL query    
+    
+ function loadMappingArray() {
+      
+        request = new Request("SELECT VsoId, Title, AssignedTE, AssignedBE FROM dbo.PartnerIsvs", function(err) {
+         if (err) {
+            console.log(err);
+            arrayErr.push(err);
+          }
+        else {
+            console.log('SQL request succeeded');
+            arrayErr.push("SQL request succeeded");
+          }
+        });
+
+    //unpack data from SQL query
+        request.on('row', function(columns) {
+            var oIsv = new isv();
+            columns.forEach(function(column) {
+              if (column.value === null) {
+                arrayIsvTE.push('');
+              } else {
+                    switch(column.metadata.colName) {
+                        case "AssignedTE": 
+                            oIsv.TE = column.value;
+                            break;
+                        case "AssignedBE":
+                            oIsv.BE = column.value;
+                            break;
+                        case "Title":
+                            oIsv.title = column.value;
+                            break;
+                        case "VsoId":
+                            oIsv.id = column.value;
+                            break;  
+                        }  
+
+                    }
+
+            });
+            arrayIsvTE.push(oIsv);
+            console.log(oIsv);
+        }); 
+
+        connection.execSql(request);
+    };
+
+
+
+
 //Tracklist Object Prototype
 function tracklist(title, artist) {
   this.title = title;
@@ -71,7 +180,12 @@ class ListTracks extends React.Component {
       <div>
         <div className="ListOfTracks">
           <ul>
-            {this.props.TrackToList.artist}{this.props.TrackToList.title}
+            <table >
+              <tr>
+                <td>{this.props.TrackToList.artist}</td>
+                <td>{this.props.TrackToList.title}</td>
+              </tr>
+            </table>
           </ul>
         </div>
        </div>
@@ -90,7 +204,8 @@ class ListJammer extends React.Component {
   }
 
    handleClick() {
-      console.log('handling click in JammerNavigation on ' + this.props.JammerToList.name)
+      console.log('handling click in JammerNavigation on ' + this.props.JammerToList.name);
+      console.log(arrayErr[0]);
       this.setState({
           tracksVisible: !this.state.tracksVisible
       })
@@ -103,15 +218,21 @@ class ListJammer extends React.Component {
       <div>
         <div className="ListJammer" onClick={() => this.handleClick()}>
           <ul>
-            {this.props.JammerToList.name}
-            {this.props.JammerToList.image}
-            {this.props.JammerToList.badge}
-            {this.props.JammerToList.tracklist.map(item => (
-              <ListTracks 
-                  TrackToList={item}
-                  DisplayTracks={this.state.tracksVisible}
-                  />
-            ))}
+            <table>
+              <tr>
+                <td colspan="2">{this.props.JammerToList.name}</td>
+                <td>{this.props.JammerToList.image}</td>
+                <td>{this.props.JammerToList.badge}</td>
+              </tr>
+              </table>
+            <table>
+                {this.props.JammerToList.tracklist.map(item => (
+                  <ListTracks 
+                      TrackToList={item}
+                      DisplayTracks={this.state.tracksVisible}
+                      />
+                ))}
+            </table>
           </ul>
         </div>
        </div>
