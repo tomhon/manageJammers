@@ -8,9 +8,8 @@
             "type": "node",
             "request": "launch",
             "name": "Launch Program",
-            "program": "${workspaceRoot}\\app.js"
-        },
-         "env": {
+            "program": "${workspaceRoot}\\app.js",
+            "env": {
                 "NODE_ENV": "development",
                 "AppID": "ed4db23d-d257-4e0d-b73e-90aab4c1939b",
                 "AppSecret": "N9OZb81eznu3UoJkQ1AdbW9",
@@ -28,7 +27,10 @@
                 "odataEndpoint": "https://msgtm.azurewebsites.net/ApplicationDataService.svc",
                 "odataUsername": "isvfinderbot",
                 "odataPassword": "Building9"
-            },
+            
+        }
+        },
+
         {
             "type": "node",
             "request": "attach",
