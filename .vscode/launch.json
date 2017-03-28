@@ -10,6 +10,25 @@
             "name": "Launch Program",
             "program": "${workspaceRoot}\\app.js"
         },
+         "env": {
+                "NODE_ENV": "development",
+                "AppID": "ed4db23d-d257-4e0d-b73e-90aab4c1939b",
+                "AppSecret": "N9OZb81eznu3UoJkQ1AdbW9",
+                "LUISServiceURL": "https://api.projectoxford.ai/luis/v1/application?id=690da5d1-fef2-4457-8073-2eb7d4c95cb1&subscription-key=929a376180624437bc881e4501940e3e&q=",
+                "APPINSIGHTS_INSTRUMENTATIONKEY": "281695f2-9eb3-40d7-ad70-d8eedae3b6aa",
+                "SQLuserName": "Teslovetohack@k9",
+                "SQLpassword": "Building9",
+                "SQLserver": "k9.database.windows.net",
+                "SQLdatabase": "TEDGISV",
+                "appSQLdatabase" : "isvpartnerbot",
+                "GTMSQLuserName": "gtm_reader",
+                "GTMSQLpassword": "!23Qwe$!",
+                "GTMSQLserver": "c282lrx2z4.database.windows.net",
+                "GTMSQLdatabase": "gtm_production",
+                "odataEndpoint": "https://msgtm.azurewebsites.net/ApplicationDataService.svc",
+                "odataUsername": "isvfinderbot",
+                "odataPassword": "Building9"
+            },
         {
             "type": "node",
             "request": "attach",

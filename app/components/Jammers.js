@@ -1,63 +1,57 @@
 var React = require('react');
 
 // //Connect to SQL Server
-// var Request = require('tedious').Request;
-// var TYPES = require('tedious').TYPES; 
-// var Connection = require('tedious').Connection;
+var Request = require('tedious').Request;
+var TYPES = require('tedious').TYPES; 
+var Connection = require('tedious').Connection;
 
 // console.log('requires completed');
 
 // //initialize mapping data array
 
 // //arrayIsvTE is sourced from SQL Server
-// var arrayIsvTE = new Array();
+var arrayIsvTE = new Array();
 
-// function isv() {
-//     this.id = 0;
-//     this.title = "";
-//     this.TE = "";
-//     this.BE = "";
-// }
+function isv() {
+    this.id = 0;
+    this.title = "";
+    this.TE = "";
+    this.BE = "";
+}
 
 
 // //error logging array
-// var arrayErr = new Array();
+var arrayErr = new Array();
 
 // // set up SQL server connection using Application Environment Variables
 
-//     var config = {
-//             userName: process.env.SQLuserName || 'Teslovetohack@k9',
-//             password: process.env.SQLpassword || 'Building9',
-//             server: process.env.SQLserver || 'k9.database.windows.net',
-//             // If you are on Microsoft Azure, you need this:
-//             options: {encrypt: true, database: process.env.SQLdatabase || 'TEDGISV'}
-//         };
 
-// // var config = {
-// //     userName: process.env.SQLuserName,
-// //     password: process.env.SQLpassword,
-// //     server: process.env.SQLserver,
-// //     // If you are on Microsoft Azure, you need this:
-// //     options: {encrypt: true, database: process.env.SQLdatabase}
-// // };
+
+var config = {
+    userName: process.env.SQLuserName,
+    password: process.env.SQLpassword,
+    server: process.env.SQLserver,
+    // If you are on Microsoft Azure, you need this:
+    options: {encrypt: true, database: process.env.SQLdatabase}
+};
 
 // //initiate connection to SQL Server
-// var connection = new Connection(config);
-// connection.on('connect', function(err) {
-//     // If no error, then good to proceed.
+var connection = new Connection(config);
+connection.on('connect', function(err) {
+    // If no error, then good to proceed.
     
-//         if (err) {
-//         //    console.log(err);
-//             arrayErr.push(err);
-//         } else {
-//           console.log("Connected to " + this.config.server + " " + this.config.options.database);
-//           arrayErr.push("Connected to " + this.config.server);
-//           loadMappingArray();  
+        if (err) {
+        //    console.log(err);
+            arrayErr.push(err);
+        } else {
+          console.log("Connected to " + this.config.server + " " + this.config.options.database);
+          arrayErr.push("Connected to " + this.config.server);
+          loadMappingArray();  
 
-//         };
+        };
         
         
-//     });
+    });
  
 //  //function to execute SQL query    
     
