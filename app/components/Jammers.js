@@ -1,4 +1,7 @@
 var React = require('react');
+var docdbUtils = require('../../Models/docdbUtils');
+var itemManager = require('../../Models/itemManager');
+
 
 
 //Tracklist Object Prototype
@@ -110,20 +113,22 @@ class ListJammer extends React.Component {
         <div className="ListJammer" onClick={() => this.handleClick()}>
           <ul>
             <table>
+              <tbody>
               <tr>
-                <td colspan="2">{this.props.JammerToList.name}</td>
+                <td>{this.props.JammerToList.name}</td>
                 <td>{this.props.JammerToList.image}</td>
                 <td>{this.props.JammerToList.badge}</td>
               </tr>
+              </tbody>
               </table>
-            <table>
+
                 {this.props.JammerToList.tracklist.map(item => (
                   <ListTracks 
                       TrackToList={item}
                       DisplayTracks={this.state.tracksVisible}
                       />
                 ))}
-            </table>
+
           </ul>
         </div>
        </div>
