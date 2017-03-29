@@ -11,9 +11,10 @@
             "program": "${workspaceRoot}\\app.js",
             "env": {
                 "NODE_ENV": "development",
-                "DocdbDatabase": "",
-                "DocdbuserName": "",
-                "DocdbPassword": ""
+                "HOST": "https://soundbot.documents.azure.com:443/",
+                "AUTH_KEY": "3j57423b4Rb36Jqba4bI3yHF1Xi63AhelGWkTvGVEAIW9mFP3NljO1BmvAPkE0dY6PSuxPSAeT6qGOnVXui9kg==",
+                "databaseId": "SoundBot",
+                "collectionId": "Jams"
 
             
         }

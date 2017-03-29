@@ -136,6 +136,48 @@ class ListJammer extends React.Component {
   }
 }
 
+// ===========================================================
+class ListDB extends React.Component {
+
+  constructor() {
+    super();
+    this.state = {
+      dbVisible: false
+    };
+  }
+
+   handleClick() {
+      console.log('handling click in ListDB  ' );
+      this.setState({
+          dbVisible: !this.state.dbVisible
+      })
+      
+      } 
+
+  
+  render() { 
+    return (
+      <div>
+        <div className="ListDB" onClick={() => this.handleClick()}>
+          <ul>Database List
+              <table>
+                <tbody>
+                <tr>
+                  <td>Item1</td>
+                  <td>Item2</td>
+                  <td>Item3</td>
+                </tr>
+                </tbody>
+                </table>
+          </ul>
+        </div>
+       </div>
+    );
+  }
+}
+
+
+
 
 // ===========================================================
 class JammerNavigation extends React.Component {
@@ -154,6 +196,7 @@ class JammerNavigation extends React.Component {
                 />
             ))}
           </ul>
+          <ListDB/>
        </div>
     );
   }
