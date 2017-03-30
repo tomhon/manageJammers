@@ -1,6 +1,7 @@
 var React = require('react');
 var docdbUtils = require('../../Models/docdbUtils');
 var itemManager = require('../../Models/itemManager');
+var jamdb = require('../../docdbfunctions');
 
 
 
@@ -11,6 +12,7 @@ function tracklist(title, artist) {
 } 
 
 var jammer = new Array();
+
 
 jammer[0] = {
   "image": "Image of Tom",
@@ -63,6 +65,15 @@ console.log(jammer[0].tracklist[0]);
 //   return trackInfo;
   
 // };
+
+
+function reloadJamdb () {
+        jamdb.getDatabase()
+        .then(() => jamdb.getCollection())
+        .then(() => jamdb.queryCollection())
+        .then(() => { jamdb.exit(`Completed successfully`); })
+        .catch((error) => { console.log(error);jamdb.exit(`Completed with error ${JSON.stringify(error)}`) });
+};
 
 
 
@@ -148,6 +159,7 @@ class ListDB extends React.Component {
 
    handleClick() {
       console.log('handling click in ListDB  ' );
+      reloadJamdb();
       this.setState({
           dbVisible: !this.state.dbVisible
       })

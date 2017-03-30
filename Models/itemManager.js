@@ -3,8 +3,8 @@
 
  function ItemManager(documentDBClient, databaseId, collectionId) {
      this.client = documentDBClient;
-     this.databaseId = databaseId;
-     this.collectionId = collectionId;
+     this.databaseId = process.env.databaseId;
+     this.collectionId = process.env.collectionId;
 
      this.database = null;
      this.collection = null;
